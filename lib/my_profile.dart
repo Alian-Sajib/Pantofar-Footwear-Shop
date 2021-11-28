@@ -6,8 +6,6 @@ import 'drawer.dart';
 import 'login_page.dart';
 
 class Profile extends StatefulWidget {
-  //const Profile({Key? key}) : super(key: key);
-
   UserProvider userProvider;
 
   Profile({required this.userProvider});

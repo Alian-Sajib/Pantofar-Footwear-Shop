@@ -53,10 +53,6 @@ class _ReviewCartState extends State<ReviewCart> {
     reviewCartProvider = Provider.of<ReviewCartProvider>(context);
     reviewCartProvider.getReviewCartData();
 
-    Color primaryColor = Color(0xffd1ad17);
-    Color scaffoldBackgroundColor = Color(0xffcbcbcb);
-    Color textColor = Colors.black87;
-
     return Scaffold(
       bottomNavigationBar: ListTile(
         title: Text(

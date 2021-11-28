@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pantofar/providers/product_provider.dart';
+import 'package:pantofar/providers/men_product_provider.dart';
 import 'package:pantofar/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'ProductOverview.dart';

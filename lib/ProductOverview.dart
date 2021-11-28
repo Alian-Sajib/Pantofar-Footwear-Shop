@@ -4,14 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pantofar/providers/review_cart_provider.dart';
 import 'package:pantofar/review_cart.dart';
-import 'package:pantofar/widgets/count.dart';
 import 'package:provider/provider.dart';
-import 'home.dart';
-
-enum SinginCharacter { fill, outline }
 
 class ProductOverview extends StatefulWidget {
-  // const ProductOverview({Key? key, required this.productName, required this.productImage, required this.productPrice}) : super(key: key);
 
   String productName;
   String productImage;
@@ -54,8 +49,7 @@ class _ProductOverviewState extends State<ProductOverview> {
 
   @override
   Widget Count(context) {
-    //  getAddAndQuantity();
-   // ReviewCartProvider reviewCartProvider = Provider.of(context);
+
     return Container(
       height: 35,
       width: 90,
@@ -72,18 +66,10 @@ class _ProductOverviewState extends State<ProductOverview> {
                 setState(() {
                   count = 1;
                 });
-                //reviewCartProvider.reviewCartDataDelete(widget.productId);
               } else if (count > 1) {
                 setState(() {
                   count--;
                 });
-                // reviewCartProvider.updateReviewCartData(
-                //   cartId: widget.productId,
-                //   cartImage: widget.productImage,
-                //   cartName: widget.productName,
-                //   cartPrice: widget.productPrice,
-                //   cartQuantity: count,
-                // ),
               }
             },
             child: Icon(
@@ -105,13 +91,6 @@ class _ProductOverviewState extends State<ProductOverview> {
               setState(() {
                 count++;
               });
-              // reviewCartProvider.updateReviewCartData(
-              //   cartId: widget.productId,
-              //   cartImage: widget.productImage,
-              //   cartName: widget.productName,
-              //   cartPrice: widget.productPrice,
-              //   cartQuantity: count,
-              //);
             },
             child: Icon(
               Icons.add,
@@ -122,29 +101,6 @@ class _ProductOverviewState extends State<ProductOverview> {
         ],
       ),
     );
-  }
-
-  getAddAndQuantity() {
-    FirebaseFirestore.instance
-        .collection("ReviewCart")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection("UserReviewCart")
-        .doc(widget.productId)
-        .get()
-        .then(
-          (value) => {
-            if (this.mounted)
-              {
-                if (value.exists)
-                  {
-                    setState(() {
-                      count = value.get("cartQuantity");
-                      isTrue = value.get("isAdd");
-                    })
-                  }
-              }
-          },
-        );
   }
 
   Widget bottomNavigatorBar({
@@ -187,7 +143,6 @@ class _ProductOverviewState extends State<ProductOverview> {
 
   @override
   Widget build(BuildContext context) {
-   // getAddAndQuantity();
     ReviewCartProvider reviewCartProvider = Provider.of(context);
 
     return Scaffold(
@@ -202,21 +157,6 @@ class _ProductOverviewState extends State<ProductOverview> {
                   ? Icons.shopping_cart_outlined
                   : Icons.favorite,
               onTap: () {
-                // setState(() {
-                //   wishListBool = !wishListBool;
-                // });
-                // if (wishListBool == true) {
-                //   wishListProvider.addWishListData(
-                //     wishListId: widget.productId,
-                //     wishListImage: widget.productImage,
-                //     wishListName: widget.productName,
-                //     wishListPrice: widget.productPrice,
-                //     wishListQuantity: 2,
-                //
-                //   );
-                // } else {
-                //   wishListProvider.deleteWishtList(widget.productId);
-                // }
                   reviewCartProvider.addReviewCartData(
                   cartId: widget.productId,
                   cartImage: widget.productImage,
@@ -257,28 +197,6 @@ class _ProductOverviewState extends State<ProductOverview> {
               width: double.infinity,
               child: Column(
                 children: [
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children:[
-                  //     Text(
-                  //       "${widget.productName}",
-                  //       style: TextStyle(
-                  //         color: Colors.black87,
-                  //         fontWeight: FontWeight.w600,
-                  //         fontSize: 16,
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       "Price : ${widget.productPrice}",
-                  //       style: TextStyle(
-                  //         color: Colors.black87,
-                  //         fontWeight: FontWeight.w600,
-                  //         fontSize: 16,
-                  //       ),
-                  //     ),
-                  //
-                  //   ]
-                  // ),
                   ListTile(
                     title: Text(
                       "${widget.productName}",
@@ -369,43 +287,6 @@ class _ProductOverviewState extends State<ProductOverview> {
                           ),
                         ]),
                         Count(context),
-                        // Count(
-                        //   productId: widget.productId,
-                        //   productImage: widget.productImage,
-                        //   productName: widget.productName,
-                        //   productPrice: widget.productPrice,
-                        //   productUnit: '500 Gram',
-                        //  ),
-
-                        // Container(
-                        //   padding: EdgeInsets.symmetric(
-                        //     horizontal: 30,
-                        //     vertical: 10,
-                        //   ),
-                        //   decoration: BoxDecoration(
-                        //     border: Border.all(
-                        //       color: Colors.black,
-                        //     ),
-                        //     borderRadius: BorderRadius.circular(
-                        //       30,
-                        //     ),
-                        //   ),
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: [
-                        //       Icon(
-                        //         Icons.add,
-                        //         size: 17,
-                        //         color: Colors.black87,
-                        //       ),
-                        //       Text(
-                        //         "ADD",
-                        //         style: TextStyle(color: Colors.black87),
-                        //       )
-                        //
-                        //     ],
-                        //   ),
-                        // ),
                       ],
                     ),
                   )

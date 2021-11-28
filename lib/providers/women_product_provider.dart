@@ -5,19 +5,6 @@ import 'package:pantofar/models/product_model.dart';
 class WomenProductProvider with ChangeNotifier {
   late ProductModel productModel;
 
-  /*List<ProductModel> search = [];
-  productModels(QueryDocumentSnapshot element) {
-
-    productModel = ProductModel(
-      productImage: element.get("productImage"),
-      productName: element.get("productName"),
-      productPrice: element.get("productPrice"),
-    //  productId: element.get("productId"),
-    // productUnit: element.get("productUnit"),
-    );
-    search.add(productModel);
-  } */
-
   List<ProductModel> womensProductList = [];
 
   fatchWomensProductData() async {

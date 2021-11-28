@@ -116,13 +116,6 @@ class _DrawerSideState extends State<DrawerSide> {
             listTile(
               iconData: Icons.favorite_outline,
               title: "Wishlist",
-              /* onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => WishLsit(),
-                    ),
-                  );
-                } */
             ),
             listTile(
               iconData: Icons.exit_to_app_outlined,
