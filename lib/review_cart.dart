@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pantofar/providers/review_cart_provider.dart';
 import 'package:pantofar/widgets/SingleItem.dart';
 import 'package:provider/provider.dart';
+import 'delivery_details.dart';
 import 'models/review_cart_model.dart';
 
 class ReviewCart extends StatefulWidget {
@@ -12,6 +13,23 @@ class ReviewCart extends StatefulWidget {
 
 class _ReviewCartState extends State<ReviewCart> {
   late ReviewCartProvider reviewCartProvider;
+  late FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
+  Widget toast = Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(25.0),
+      color: Colors.redAccent,
+    ),
+    child: Text("No Review Cart Item"),
+  );
 
   showAlertDialog(BuildContext context, ReviewCartModel delete) {
     // set up the buttons
@@ -32,7 +50,7 @@ class _ReviewCartState extends State<ReviewCart> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Cart Product"),
-      content: Text("Are you delete on cartProduct?"),
+      content: Text("Are you want to delete cartProduct?"),
       actions: [
         cancelButton,
         continueButton,
@@ -56,10 +74,11 @@ class _ReviewCartState extends State<ReviewCart> {
     return Scaffold(
       bottomNavigationBar: ListTile(
         title: Text(
-            'Total Amount :',
-            style: TextStyle(color: Colors.black87,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+          'Total Amount :',
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
           ),
         ),
         subtitle: Text(
@@ -75,10 +94,10 @@ class _ReviewCartState extends State<ReviewCart> {
           child: MaterialButton(
             child: Text(
               'Order Now',
-              style: TextStyle(color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w400
-              ),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400),
             ),
             color: Colors.black87,
             shape: RoundedRectangleBorder(
@@ -87,14 +106,17 @@ class _ReviewCartState extends State<ReviewCart> {
               ),
             ),
             onPressed: () {
-              // if(reviewCartProvider.getReviewCartDataList.isEmpty){
-              //   return Fluttertoast.showToast(msg: "No Cart Data Found");
-              // }
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => DeliveryDetails(),
-              //   ),
-            //  );
+              if (reviewCartProvider.getReviewCartDataList.isEmpty) {
+                //  Fluttertoast.showToast(msg: "No Cart Data Found");
+                return fToast.showToast(
+                  child: toast,
+                );
+              }
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => DeliveryDetails(),
+                ),
+              );
             },
           ),
         ),
@@ -108,36 +130,35 @@ class _ReviewCartState extends State<ReviewCart> {
       ),
       body: reviewCartProvider.getReviewCartDataList.isEmpty
           ? Center(
-        child: Text("NO ITEM"),
-      )
+              child: Text("NO ITEM"),
+            )
           : ListView.builder(
-        itemCount: reviewCartProvider.getReviewCartDataList.length,
-        itemBuilder: (context, index) {
-          ReviewCartModel data =
-          reviewCartProvider.getReviewCartDataList[index];
-          return Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-
-              SingleItem(
-                isBool: true,
-                wishList: false,
-                productImage: data.cartImage,
-                productName: data.cartName,
-                productPrice: data.cartPrice,
-                productId: data.cartId,
-                productQuantity: data.cartQuantity,
-                productSize: data.cartSize,
-                onDelete: () {
-                  showAlertDialog(context, data);
-                },
-              ),
-            ],
-          );
-        },
-      ),
+              itemCount: reviewCartProvider.getReviewCartDataList.length,
+              itemBuilder: (context, index) {
+                ReviewCartModel data =
+                    reviewCartProvider.getReviewCartDataList[index];
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SingleItem(
+                      isBool: true,
+                      wishList: false,
+                      productImage: data.cartImage,
+                      productName: data.cartName,
+                      productPrice: data.cartPrice,
+                      productId: data.cartId,
+                      productQuantity: data.cartQuantity,
+                      productSize: data.cartSize,
+                      onDelete: () {
+                        showAlertDialog(context, data);
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
     );
   }
 }

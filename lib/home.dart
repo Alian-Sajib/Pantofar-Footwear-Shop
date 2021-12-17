@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'MenCollection.dart';
 import 'WomenCollection.dart';
-import 'drawer.dart';
+import 'widgets/drawer.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

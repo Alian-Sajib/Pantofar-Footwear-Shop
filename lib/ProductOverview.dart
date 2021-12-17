@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pantofar/providers/review_cart_provider.dart';
@@ -7,7 +5,6 @@ import 'package:pantofar/review_cart.dart';
 import 'package:provider/provider.dart';
 
 class ProductOverview extends StatefulWidget {
-
   String productName;
   String productImage;
   int productPrice;
@@ -25,9 +22,6 @@ class ProductOverview extends StatefulWidget {
 }
 
 class _ProductOverviewState extends State<ProductOverview> {
-  Color primaryColor = Color(0xffd1ad17);
-  Color scaffoldBackgroundColor = Color(0xffcbcbcb);
-  Color textColor = Colors.black87;
   String dropdownValue = '39';
   bool isTrue = false;
   int count = 1;
@@ -49,7 +43,6 @@ class _ProductOverviewState extends State<ProductOverview> {
 
   @override
   Widget Count(context) {
-
     return Container(
       height: 35,
       width: 90,
@@ -157,7 +150,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                   ? Icons.shopping_cart_outlined
                   : Icons.favorite,
               onTap: () {
-                  reviewCartProvider.addReviewCartData(
+                reviewCartProvider.addReviewCartData(
                   cartId: widget.productId,
                   cartImage: widget.productImage,
                   cartName: widget.productName,
@@ -165,7 +158,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                   cartQuantity: count,
                   cartSize: dropdownValue,
                 );
-                  showAlertDialog(context);
+                showAlertDialog(context);
               }),
           bottomNavigatorBar(
               backgroundColor: Color(0xffffd878),
@@ -236,7 +229,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                       "Available Options",
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: textColor,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
                       ),
@@ -318,7 +311,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                     '-> Handcrafted in Bangladesh Material\n ->Genuine Leatherle',
                     style: TextStyle(
                       fontSize: 16,
-                      color: textColor,
+                      color: Colors.black,
                     ),
                   ),
                 ],
