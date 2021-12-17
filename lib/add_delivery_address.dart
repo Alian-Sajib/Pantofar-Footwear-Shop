@@ -12,6 +12,7 @@ class _AddDeliverAddressState extends State<AddDeliverAddress> {
   @override
   Widget build(BuildContext context) {
     CheckoutProvider checkoutProvider = Provider.of(context);
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
