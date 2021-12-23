@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pantofar/bKashPay.dart';
+import 'package:pantofar/order_confirm.dart';
 import 'package:provider/provider.dart';
 import 'models/delivery_address_model.dart';
 import 'providers/check_out_provider.dart';
@@ -42,12 +43,12 @@ class _PaymentSummaryState extends State<PaymentSummary> {
           i < reviewCartProvider.getReviewCartDataList.length;
           i++) {
         firebaseFirestore
-            .collection("OrderInfo")
+            .collection("CashOnOrderInfo")
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .collection("Order Serial Id")
-            .doc()
+            .doc(reviewCartProvider.getReviewCartDataList[i].cartId)
             .set({
-          "id": reviewCartProvider.getReviewCartDataList[i].cartId,
+          //"id": reviewCartProvider.getReviewCartDataList[i].cartId,
           "quantity": reviewCartProvider.getReviewCartDataList[i].cartQuantity,
           "price": reviewCartProvider.getReviewCartDataList[i].cartPrice,
           "size": reviewCartProvider.getReviewCartDataList[i].cartSize,
@@ -56,7 +57,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
       //delivery list...
 
       FirebaseFirestore.instance
-          .collection("OrderInfo")
+          .collection("CashOnOrderInfo")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
         "firstname": widget.deliverAddressList.firstName,
@@ -66,7 +67,18 @@ class _PaymentSummaryState extends State<PaymentSummary> {
         "city": widget.deliverAddressList.city,
         "postalcode": widget.deliverAddressList.postalcode,
       });
-      reviewCartProvider.reviewCartDelete();
+      //deleted ordered cart
+      for (int i = 0;
+          i < reviewCartProvider.getReviewCartDataList.length;
+          i++) {
+        reviewCartProvider.reviewCartDataDelete(
+            reviewCartProvider.getReviewCartDataList[i].cartId);
+      }
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ConfirmOrder(),
+        ),
+      );
     }
 
     return Scaffold(
@@ -88,7 +100,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
           ),
         ),
         subtitle: Text(
-          "${totalPrice}/=",
+          "${totalPrice}.00/=",
           style: TextStyle(
             color: Colors.green[900],
             fontWeight: FontWeight.bold,
@@ -168,7 +180,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                     ),
                   ),
                   trailing: Text(
-                    "${totalPrice - 100}/=",
+                    "${totalPrice - 100}.00/=",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -186,7 +198,7 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                     ),
                   ),
                   trailing: Text(
-                    "100/=",
+                    "100.00/=",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

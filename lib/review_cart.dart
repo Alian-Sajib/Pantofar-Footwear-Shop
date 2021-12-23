@@ -72,93 +72,92 @@ class _ReviewCartState extends State<ReviewCart> {
     reviewCartProvider.getReviewCartData();
 
     return Scaffold(
-      bottomNavigationBar: ListTile(
-        title: Text(
-          'Total Amount :',
-          style: TextStyle(
-            color: Colors.black87,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        subtitle: Text(
-          '${reviewCartProvider.getTotalPrice()}/=',
-          style: TextStyle(
-            color: Colors.green[900],
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
-        ),
-        trailing: Container(
-          width: 160,
-          child: MaterialButton(
-            child: Text(
-              'Order Now',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
+        bottomNavigationBar: ListTile(
+          title: Text(
+            'Total Amount :',
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
-            color: Colors.black87,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                30,
+          ),
+          subtitle: Text(
+            '${reviewCartProvider.getTotalPrice()}.00/=',
+            style: TextStyle(
+              color: Colors.green[900],
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
+          ),
+          trailing: Container(
+            width: 160,
+            child: MaterialButton(
+              child: Text(
+                'Order Now',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400),
               ),
-            ),
-            onPressed: () {
-              if (reviewCartProvider.getReviewCartDataList.isEmpty) {
-                //  Fluttertoast.showToast(msg: "No Cart Data Found");
-                return fToast.showToast(
-                  child: toast,
-                );
-              }
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => DeliveryDetails(),
+              color: Colors.black87,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  30,
                 ),
-              );
-            },
-          ),
-        ),
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.black87,
-        title: Text(
-          "Review Cart",
-          style: TextStyle(color: Colors.white, fontSize: 18),
-        ),
-      ),
-      body: reviewCartProvider.getReviewCartDataList.isEmpty
-          ? Center(
-              child: Text("NO ITEM"),
-            )
-          : ListView.builder(
-              itemCount: reviewCartProvider.getReviewCartDataList.length,
-              itemBuilder: (context, index) {
-                ReviewCartModel data =
-                    reviewCartProvider.getReviewCartDataList[index];
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SingleItem(
-                      isBool: true,
-                      wishList: false,
-                      productImage: data.cartImage,
-                      productName: data.cartName,
-                      productPrice: data.cartPrice,
-                      productId: data.cartId,
-                      productQuantity: data.cartQuantity,
-                      productSize: data.cartSize,
-                      onDelete: () {
-                        showAlertDialog(context, data);
-                      },
-                    ),
-                  ],
+              ),
+              onPressed: () {
+                if (reviewCartProvider.getReviewCartDataList.isEmpty) {
+                  //  Fluttertoast.showToast(msg: "No Cart Data Found");
+                  return fToast.showToast(
+                    child: toast,
+                  );
+                }
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => DeliveryDetails(),
+                  ),
                 );
               },
             ),
-    );
+          ),
+        ),
+        appBar: AppBar(
+          backgroundColor: Colors.black87,
+          title: Text(
+            "Review Cart",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+        ),
+        body: reviewCartProvider.getReviewCartDataList.isEmpty
+            ? Center(
+                child: Text("NO ITEM"),
+              )
+            : ListView.builder(
+                itemCount: reviewCartProvider.getReviewCartDataList.length,
+                itemBuilder: (context, index) {
+                  ReviewCartModel data =
+                      reviewCartProvider.getReviewCartDataList[index];
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SingleItem(
+                        isBool: true,
+                        wishList: false,
+                        productImage: data.cartImage,
+                        productName: data.cartName,
+                        productPrice: data.cartPrice,
+                        productId: data.cartId,
+                        productQuantity: data.cartQuantity,
+                        productSize: data.cartSize,
+                        onDelete: () {
+                          showAlertDialog(context, data);
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ));
   }
 }

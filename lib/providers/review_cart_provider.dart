@@ -103,16 +103,4 @@ class ReviewCartProvider with ChangeNotifier {
         .delete();
     notifyListeners();
   }
-
-  reviewCartDelete() {
-    final collection = FirebaseFirestore.instance.collection("ReviewCart");
-    collection
-        .doc(
-            FirebaseAuth.instance.currentUser!.uid) // <-- Doc ID to be deleted.
-        .collection("UserReviewCart")
-        .doc()
-        .delete() // <-- Delete
-        .then((_) => print('Deleted'))
-        .catchError((error) => print('Delete failed: $error'));
-  }
 }

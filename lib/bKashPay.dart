@@ -9,6 +9,7 @@ import 'package:pantofar/widgets/bkashPayFieldsTitle&Value.dart';
 import 'package:provider/provider.dart';
 
 import 'models/delivery_address_model.dart';
+import 'order_confirm.dart';
 
 class BkashPay extends StatefulWidget {
   String firstName;
@@ -66,9 +67,9 @@ class _BkashPayState extends State<BkashPay> {
             .collection("OnlineOrderInfo")
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .collection("Order Serial Id")
-            .doc()
+            .doc(reviewCartProvider.getReviewCartDataList[i].cartId)
             .set({
-          "id": reviewCartProvider.getReviewCartDataList[i].cartId,
+          // "id": reviewCartProvider.getReviewCartDataList[i].cartId,
           "quantity": reviewCartProvider.getReviewCartDataList[i].cartQuantity,
           "price": reviewCartProvider.getReviewCartDataList[i].cartPrice,
           "size": reviewCartProvider.getReviewCartDataList[i].cartSize,
@@ -86,7 +87,19 @@ class _BkashPayState extends State<BkashPay> {
         "city": widget.city,
         "postalcode": widget.postalCode,
       });
-      reviewCartProvider.reviewCartDelete();
+
+      for (int i = 0;
+          i < reviewCartProvider.getReviewCartDataList.length;
+          i++) {
+        reviewCartProvider.reviewCartDataDelete(
+            reviewCartProvider.getReviewCartDataList[i].cartId);
+      }
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ConfirmOrder(),
+        ),
+      );
     }
 
     return SafeArea(
