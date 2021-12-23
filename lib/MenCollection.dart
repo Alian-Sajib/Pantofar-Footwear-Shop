@@ -29,20 +29,20 @@ class _MensState extends State<Mens> {
             mainAxisSpacing: 10,
             crossAxisCount: 2,
             children: productProvider.getMensProductDataList.map(
-                  (mensProductData) {
+              (mensProductData) {
                 return SingleProduct(
-                    onTap :() {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                          builder: (context) => ProductOverview(
-                            productId: mensProductData.productId,
-                            productName: mensProductData.productName,
-                            productImage: mensProductData.productImage,
-                            productPrice: mensProductData.productPrice,
-                          ),
-                          ),
-                      );
-                    },
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ProductOverview(
+                          productId: mensProductData.productId,
+                          productName: mensProductData.productName,
+                          productImage: mensProductData.productImage,
+                          productPrice: mensProductData.productPrice,
+                        ),
+                      ),
+                    );
+                  },
                   productImage: mensProductData.productImage,
                   productName: mensProductData.productName,
                   productPrice: mensProductData.productPrice,
@@ -51,7 +51,6 @@ class _MensState extends State<Mens> {
             ).toList(),
           ),
         ),
-
       ],
     );
   }
@@ -65,7 +64,6 @@ class _MensState extends State<Mens> {
 
   @override
   Widget build(BuildContext context) {
-
     productProvider = Provider.of(context);
     UserProvider userProvider = Provider.of(context);
     userProvider.getUserData();

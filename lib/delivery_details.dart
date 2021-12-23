@@ -12,7 +12,6 @@ class DeliveryDetails extends StatefulWidget {
 }
 
 class _DeliveryDetailsState extends State<DeliveryDetails> {
-
   late DeliveryAddressModel value;
 
   @override
@@ -102,7 +101,7 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                       number: e.mobileNo,
                     );
                   }).toList(),
-          )
+                )
         ],
       ),
     );

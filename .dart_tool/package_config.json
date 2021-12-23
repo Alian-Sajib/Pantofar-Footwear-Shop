@@ -110,6 +110,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_otp_text_field",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_otp_text_field-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_signin_button",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_signin_button-2.0.0",
       "packageUri": "lib/",
@@ -284,7 +290,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-12-16T19:10:43.122350Z",
+  "generated": "2021-12-22T16:13:30.607528Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pantofar/delivery_details.dart';
+import 'package:pantofar/bKashPay.dart';
 import 'package:provider/provider.dart';
 import 'models/delivery_address_model.dart';
+import 'providers/check_out_provider.dart';
 import 'providers/review_cart_provider.dart';
 import 'widgets/order_item.dart';
 import 'widgets/single_delivery_item.dart';
+import 'add_delivery_address.dart';
+import 'models/delivery_address_model.dart';
 
 class PaymentSummary extends StatefulWidget {
   final DeliveryAddressModel deliverAddressList;
@@ -22,12 +27,47 @@ enum PaymentTypes {
 
 class _PaymentSummaryState extends State<PaymentSummary> {
   var myType = PaymentTypes.CashOn;
+  late DeliveryAddressModel value;
 
   @override
   Widget build(BuildContext context) {
     ReviewCartProvider reviewCartProvider = Provider.of(context);
     reviewCartProvider.getReviewCartData();
-    double totalPrice = reviewCartProvider.getTotalPrice() + 100;
+
+    int totalPrice = reviewCartProvider.getTotalPrice() + 100;
+
+    void uploadOrderInfo() {
+      FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+      for (int i = 0;
+          i < reviewCartProvider.getReviewCartDataList.length;
+          i++) {
+        firebaseFirestore
+            .collection("OrderInfo")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection("Order Serial Id")
+            .doc()
+            .set({
+          "id": reviewCartProvider.getReviewCartDataList[i].cartId,
+          "quantity": reviewCartProvider.getReviewCartDataList[i].cartQuantity,
+          "price": reviewCartProvider.getReviewCartDataList[i].cartPrice,
+          "size": reviewCartProvider.getReviewCartDataList[i].cartSize,
+        });
+      }
+      //delivery list...
+
+      FirebaseFirestore.instance
+          .collection("OrderInfo")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set({
+        "firstname": widget.deliverAddressList.firstName,
+        "lastname": widget.deliverAddressList.lastName,
+        "mobileNo": widget.deliverAddressList.mobileNo,
+        "address": widget.deliverAddressList.address,
+        "city": widget.deliverAddressList.city,
+        "postalcode": widget.deliverAddressList.postalcode,
+      });
+      reviewCartProvider.reviewCartDelete();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -62,12 +102,18 @@ class _PaymentSummaryState extends State<PaymentSummary> {
               myType == PaymentTypes.OnlinePayment
                   ? Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => DeliveryDetails(
-                            //    total: totalPrice,
-                            ),
+                        builder: (context) => BkashPay(
+                          // deliverAddressList: value,
+                          firstName: widget.deliverAddressList.firstName,
+                          lastName: widget.deliverAddressList.lastName,
+                          mobileNo: widget.deliverAddressList.mobileNo,
+                          address: widget.deliverAddressList.address,
+                          city: widget.deliverAddressList.city,
+                          postalCode: widget.deliverAddressList.postalcode,
+                        ),
                       ),
                     )
-                  : Container();
+                  : uploadOrderInfo();
             },
             child: Text(
               "Place Order",

@@ -182,139 +182,143 @@ class _ProductOverviewState extends State<ProductOverview> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Column(
+      body:
+          //change
+          //removed expanded...
+          Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              width: double.infinity,
-              child: Column(
-                children: [
-                  ListTile(
+          Container(
+            width: double.infinity,
+            child: Column(
+              children: [
+                Container(
+                  height: 301,
+                  width: double.infinity,
+                  child: ListTile(
                     title: Text(
                       "${widget.productName}",
                       style: TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
                       ),
                     ),
                     subtitle: Text(
-                      "Price : ${widget.productPrice}",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 230,
-                    width: double.infinity,
-                    // padding: EdgeInsets.all(40),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.contain,
-                        image: NetworkImage(
-                          widget.productImage,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    width: double.infinity,
-                    child: Text(
-                      "Available Options",
-                      textAlign: TextAlign.start,
+                      "Price : ${widget.productPrice}/=",
                       style: TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
                         fontSize: 18,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10,
+                  // padding: EdgeInsets.all(40),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        widget.productImage,
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(children: [
-                          Text(
-                            "   Sizes :     ",
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ),
-                          DropdownButton<String>(
-                            value: dropdownValue,
-                            icon: const Icon(Icons.arrow_downward),
-                            iconSize: 24,
-                            elevation: 16,
-                            style: const TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                            underline: Container(
-                              height: 2,
-                              color: Colors.deepPurpleAccent,
-                            ),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownValue = newValue!;
-                              });
-                            },
-                            items: <String>['39', '40', '41', '42']
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ]),
-                        Count(context),
-                      ],
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  width: double.infinity,
+                  child: Text(
+                    "Available Options",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(children: [
+                        Text(
+                          "   Sizes :     ",
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                        DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: const Icon(Icons.arrow_downward),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: const TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                            });
+                          },
+                          items: <String>['39', '40', '41', '42']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ]),
+                      Count(context),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
 
           // SizedBox(height: 20),
 
           Expanded(
-            child: Container(
-              padding: EdgeInsets.all(20),
-              width: double.infinity,
-              child: ListView(
-                children: [
-                  Text(
-                    "About This Product",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 7.0),
+              child: Container(
+                padding: EdgeInsets.all(20),
+                width: double.infinity,
+                child: ListView(
+                  children: [
+                    Text(
+                      "About This Product",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Designed in a textured black leather, these loafers are perfect to stand out in a crowd. Each pair is handcrafted using finest leather with padded footbed for all day comfort\n\n"
-                    '-> Handcrafted in Bangladesh Material\n ->Genuine Leatherle',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                ],
+                    Text(
+                      "Designed in a textured black leather, these loafers are perfect to stand out in a crowd. Each pair is handcrafted using finest leather with padded footbed for all day comfort\n\n"
+                      '-> Handcrafted in Bangladesh Material\n ->Genuine Leatherle',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

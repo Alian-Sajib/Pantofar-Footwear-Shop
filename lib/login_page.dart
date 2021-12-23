@@ -16,8 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-     late UserProvider userProvider;
+  late UserProvider userProvider;
 
   _googleSignUp() async {
     try {
@@ -37,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 
       final User? user = (await _auth.signInWithCredential(credential)).user;
       // print("signed in " + user.displayName);
-        userProvider.addUserData(
+      userProvider.addUserData(
         currentUser: user,
         userEmail: user!.email,
         userImage: user.photoURL,
@@ -51,19 +50,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Color(0XFF060d20),
-      //   title: Text("Sign In"),
-      // ),
-
       body: Container(
         padding: EdgeInsets.all(16.0),
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/logobg.jpg'))),
+        // decoration: BoxDecoration(
+        // image: DecorationImage(
+        //     fit: BoxFit.cover,
+        //     image: AssetImage('assets/images/logobg.jpg'))),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -72,22 +66,22 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     SizedBox(height: 100),
 
-                  //  SizedBox(height: 20,),
+                    //  SizedBox(height: 20,),
                     Text(
-                       'PANTOFAR',
+                      'PANTOFAR',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 40,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 37,
                       ),
                     ),
                     SizedBox(height: 5),
                     Text(
-                          '  The Fastest Footwear Delivery Service ',
+                      '  The Fastest Footwear Delivery Service ',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.blueGrey,
                         fontWeight: FontWeight.w300,
-                        fontSize: 20,
+                        fontSize: 15,
                       ),
                     ),
 
@@ -100,20 +94,45 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              SizedBox(width: 10, height: 350),
-
-              SignInButton(
-                Buttons.Google,
-                text: "SIGN IN WITH GOOGLE",
-                onPressed: () async {
-                  await _googleSignUp().then(
-                    (value) => Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
+              SizedBox(
+                  width: 10, height: MediaQuery.of(context).size.height * .3),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(11, 0, 11, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //change...
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 21),
+                      child: Text(
+                        'Sign in / Sign up:',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.black),
                       ),
                     ),
-                  );
-                },
+                    SignInButton(
+                      Buttons.Google,
+                      //change...
+                      elevation: 9,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(21)),
+                      text: "SIGN IN WITH GOOGLE",
+                      padding: EdgeInsets.all(3),
+                      onPressed: () async {
+                        await _googleSignUp().then(
+                          (value) => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => Home(),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ]),
       ),

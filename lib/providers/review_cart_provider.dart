@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pantofar/models/review_cart_model.dart';
 
-
 class ReviewCartProvider with ChangeNotifier {
   void addReviewCartData({
     required String cartId,
@@ -21,16 +20,15 @@ class ReviewCartProvider with ChangeNotifier {
         .set(
       {
         "cartId": cartId,
-        "cartSize":cartSize,
+        "cartSize": cartSize,
         "cartName": cartName,
         "cartImage": cartImage,
         "cartPrice": cartPrice,
         "cartQuantity": cartQuantity,
-        "isAdd":true,
+        "isAdd": true,
       },
     );
   }
-
 
   void updateReviewCartData({
     required String cartId,
@@ -51,12 +49,13 @@ class ReviewCartProvider with ChangeNotifier {
         "cartImage": cartImage,
         "cartPrice": cartPrice,
         "cartQuantity": cartQuantity,
-        "isAdd":true,
+        "isAdd": true,
       },
     );
   }
 
   List<ReviewCartModel> reviewCartDataList = [];
+
   void getReviewCartData() async {
     List<ReviewCartModel> newList = [];
 
@@ -73,7 +72,6 @@ class ReviewCartProvider with ChangeNotifier {
         cartName: element.get("cartName"),
         cartPrice: element.get("cartPrice"),
         cartQuantity: element.get("cartQuantity"),
-
       );
       newList.add(reviewCartModel);
     });
@@ -85,17 +83,15 @@ class ReviewCartProvider with ChangeNotifier {
     return reviewCartDataList;
   }
 
-
 //// TotalPrice  ///
 //
-  getTotalPrice(){
-    double total = 0.00;
+  getTotalPrice() {
+    int total = 0;
     reviewCartDataList.forEach((element) {
       total += element.cartPrice * element.cartQuantity;
     });
     return total;
   }
-
 
 ////////////// ReviCartDeleteFunction ////////////
   reviewCartDataDelete(cartId) {
@@ -106,5 +102,17 @@ class ReviewCartProvider with ChangeNotifier {
         .doc(cartId)
         .delete();
     notifyListeners();
+  }
+
+  reviewCartDelete() {
+    final collection = FirebaseFirestore.instance.collection("ReviewCart");
+    collection
+        .doc(
+            FirebaseAuth.instance.currentUser!.uid) // <-- Doc ID to be deleted.
+        .collection("UserReviewCart")
+        .doc()
+        .delete() // <-- Delete
+        .then((_) => print('Deleted'))
+        .catchError((error) => print('Delete failed: $error'));
   }
 }
