@@ -130,7 +130,7 @@ class _ProfileState extends State<Profile> {
                       icon: Icons.shop_outlined,
                       title: "My Orders",
                       onTap: () {
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => ReviewCart(),
                           ),
@@ -141,7 +141,7 @@ class _ProfileState extends State<Profile> {
                       icon: Icons.location_on_outlined,
                       title: "My Delivery Address",
                       onTap: () {
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => ProfileDeliveryDetails(),
                           ),
