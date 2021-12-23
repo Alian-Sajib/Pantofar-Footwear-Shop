@@ -2,15 +2,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pantofar/MenCollection.dart';
+import 'package:pantofar/All_Screens/MenCollection.dart';
 import 'package:pantofar/providers/check_out_provider.dart';
 import 'package:pantofar/providers/men_product_provider.dart';
 import 'package:pantofar/providers/review_cart_provider.dart';
 import 'package:pantofar/providers/user_provider.dart';
 import 'package:pantofar/providers/women_product_provider.dart';
 import 'package:provider/provider.dart';
-import 'home.dart';
-import 'login_page.dart';
+import 'All_Screens/home.dart';
+import 'package:pantofar/All_Screens/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

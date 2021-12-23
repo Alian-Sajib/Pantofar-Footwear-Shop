@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pantofar/providers/user_provider.dart';
-import 'package:pantofar/review_cart.dart';
-import '../home.dart';
-import '../login_page.dart';
-import '../my_profile.dart';
+import 'package:pantofar/All_Screens/review_cart.dart';
+import '../All_Screens/home.dart';
+import '../All_Screens/login_page.dart';
+import '../All_Screens/my_profile.dart';
 
 
 class DrawerSide extends StatefulWidget {
