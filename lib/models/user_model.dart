@@ -3,6 +3,7 @@ class UserModel {
   String userEmail;
   String userImage;
   String userUid;
+
   UserModel({
     required this.userEmail,
     required this.userImage,

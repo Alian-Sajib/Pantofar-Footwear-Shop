@@ -7,13 +7,11 @@ class DeliveryAddressModel {
   String postalcode;
 
   DeliveryAddressModel({
-
     required this.firstName,
     required this.lastName,
     required this.mobileNo,
     required this.address,
     required this.city,
     required this.postalcode,
-
   });
 }

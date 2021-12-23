@@ -5,6 +5,7 @@ class ReviewCartModel {
   int cartPrice;
   int cartQuantity;
   String cartSize;
+
   ReviewCartModel({
     required this.cartId,
     required this.cartSize,
