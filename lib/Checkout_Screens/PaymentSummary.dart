@@ -40,8 +40,8 @@ class _PaymentSummaryState extends State<PaymentSummary> {
     void uploadOrderInfo() {
       FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
       for (int i = 0;
-          i < reviewCartProvider.getReviewCartDataList.length;
-          i++) {
+      i < reviewCartProvider.getReviewCartDataList.length;
+      i++) {
         firebaseFirestore
             .collection("CashOnOrderInfo")
             .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -69,8 +69,8 @@ class _PaymentSummaryState extends State<PaymentSummary> {
       });
       //deleted ordered cart
       for (int i = 0;
-          i < reviewCartProvider.getReviewCartDataList.length;
-          i++) {
+      i < reviewCartProvider.getReviewCartDataList.length;
+      i++) {
         reviewCartProvider.reviewCartDataDelete(
             reviewCartProvider.getReviewCartDataList[i].cartId);
       }
@@ -80,6 +80,19 @@ class _PaymentSummaryState extends State<PaymentSummary> {
         ),
       );
     }
+
+    // Future onSubmit() async {
+    //   showDialog(
+    //     barrierDismissible: false,
+    //     context: context,
+    //     builder: (context) => Center(child: CircularProgressIndicator()),
+    //   );
+    //
+    //   final file = await PdfApi.generatePDF(
+    //     order: widget.order,
+    //   )
+    //   Navigator.of(context).pop();
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -113,18 +126,19 @@ class _PaymentSummaryState extends State<PaymentSummary> {
             onPressed: () {
               myType == PaymentTypes.OnlinePayment
                   ? Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => BkashPay(
-                          // deliverAddressList: value,
-                          firstName: widget.deliverAddressList.firstName,
-                          lastName: widget.deliverAddressList.lastName,
-                          mobileNo: widget.deliverAddressList.mobileNo,
-                          address: widget.deliverAddressList.address,
-                          city: widget.deliverAddressList.city,
-                          postalCode: widget.deliverAddressList.postalcode,
-                        ),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      BkashPay(
+                        // deliverAddressList: value,
+                        firstName: widget.deliverAddressList.firstName,
+                        lastName: widget.deliverAddressList.lastName,
+                        mobileNo: widget.deliverAddressList.mobileNo,
+                        address: widget.deliverAddressList.address,
+                        city: widget.deliverAddressList.city,
+                        postalCode: widget.deliverAddressList.postalcode,
                       ),
-                    )
+                ),
+              )
                   : uploadOrderInfo();
             },
             child: Text(
@@ -149,10 +163,13 @@ class _PaymentSummaryState extends State<PaymentSummary> {
               children: [
                 SingleDeliveryItem(
                   address:
-                      "Address :  ${widget.deliverAddressList.address} \nCity :      ${widget.deliverAddressList.city}"
-                      "\nPostal Code :  ${widget.deliverAddressList.postalcode}",
+                  "Address :  ${widget.deliverAddressList
+                      .address} \nCity :      ${widget.deliverAddressList.city}"
+                      "\nPostal Code :  ${widget.deliverAddressList
+                      .postalcode}",
                   title:
-                      "${widget.deliverAddressList.firstName} ${widget.deliverAddressList.lastName}",
+                  "${widget.deliverAddressList.firstName} ${widget
+                      .deliverAddressList.lastName}",
                   number: widget.deliverAddressList.mobileNo,
                 ),
                 ExpansionTile(
@@ -162,7 +179,8 @@ class _PaymentSummaryState extends State<PaymentSummary> {
                     );
                   }).toList(),
                   title: Text(
-                    "Order Items ${reviewCartProvider.getReviewCartDataList.length}",
+                    "Order Items ${reviewCartProvider.getReviewCartDataList
+                        .length}",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
