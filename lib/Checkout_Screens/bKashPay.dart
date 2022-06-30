@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:pantofar/providers/check_out_provider.dart';
 import 'package:pantofar/providers/review_cart_provider.dart';
 import 'package:pantofar/widgets/bkashPayFieldsTitle&Value.dart';
@@ -45,6 +46,16 @@ class _BkashPayState extends State<BkashPay> {
     setState(() {
       get_otp_clicked = 1;
     });
+  }
+  secureScreen () async{
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_KEEP_SCREEN_ON);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    secureScreen();
   }
 
   @override

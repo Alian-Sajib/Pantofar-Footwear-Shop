@@ -118,6 +118,10 @@ class _DrawerSideState extends State<DrawerSide> {
               title: "Wishlist",
             ),
             listTile(
+              iconData: Icons.favorite_outline,
+              title: "Settings",
+            ),
+            listTile(
               iconData: Icons.exit_to_app_outlined,
               title: "Sign Out",
               onTap: () async {

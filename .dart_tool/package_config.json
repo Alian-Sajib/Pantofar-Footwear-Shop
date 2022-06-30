@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_windowmanager",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_windowmanager-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fluttertoast",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.8",
       "packageUri": "lib/",
@@ -290,7 +296,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-12-25T14:19:31.719662Z",
+  "generated": "2022-06-30T14:35:25.115604Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

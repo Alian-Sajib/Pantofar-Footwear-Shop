@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pantofar/providers/review_cart_provider.dart';
 import 'package:pantofar/All_Screens/review_cart.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,21 @@ class _ProductOverviewState extends State<ProductOverview> {
       },
     );
   }
+  showAlertDialog2(BuildContext context) {
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Reached Limit"),
+      content: Text("You Can Not Add Further"),
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 
   @override
   Widget Count(context) {
@@ -81,9 +97,13 @@ class _ProductOverviewState extends State<ProductOverview> {
           ),
           InkWell(
             onTap: () {
-              setState(() {
-                count++;
-              });
+              if (count >= 10) {
+                showAlertDialog2(context);
+              } else {
+                setState(() {
+                  count++;
+                });
+              }
             },
             child: Icon(
               Icons.add,
