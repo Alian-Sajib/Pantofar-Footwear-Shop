@@ -95,6 +95,7 @@ class _ProductOverviewState extends State<ProductOverview> {
               fontSize: 16,
             ),
           ),
+          // Item Counter
           InkWell(
             onTap: () {
               if (count >= 10) {

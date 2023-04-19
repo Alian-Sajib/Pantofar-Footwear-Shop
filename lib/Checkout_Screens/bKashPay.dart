@@ -47,9 +47,12 @@ class _BkashPayState extends State<BkashPay> {
       get_otp_clicked = 1;
     });
   }
+  // Screenshot
   secureScreen () async{
     await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_KEEP_SCREEN_ON);
+
+
+    await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_KEEP_SCREEN_ON); // recent app
   }
   @override
   void initState() {
